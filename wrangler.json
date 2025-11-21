@@ -10,6 +10,13 @@
   "upload_source_maps": true,
   "assets": {
     "directory": "./dist/client",
-    "not_found_handling": "single-page-application"
-  }
+    "not_found_handling": "404-page"
+  },
+  "d1_databases": [
+    {
+      "binding": "home_db",
+      "database_name": "home_db",
+      "database_id": "e9e23626-b433-4e7c-89da-655a57f05f5a"
+    }
+  ]
 }

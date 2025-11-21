@@ -1,90 +1,143 @@
-# React + Vite + Hono + Cloudflare Workers
+# URL Shortener
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/vite-react-template)
+A modern, full-stack URL shortener built with React, Vite, Hono, and Cloudflare Workers with D1 database.
 
-This template provides a minimal setup for building a React application with TypeScript and Vite, designed to run on Cloudflare Workers. It features hot module replacement, ESLint integration, and the flexibility of Workers deployments.
+![URL Shortener](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
 
-![React + TypeScript + Vite + Cloudflare Workers](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+## ✨ Features
 
-<!-- dash-content-start -->
-
-🚀 Supercharge your web development with this powerful stack:
-
-- [**React**](https://react.dev/) - A modern UI library for building interactive interfaces
-- [**Vite**](https://vite.dev/) - Lightning-fast build tooling and development server
-- [**Hono**](https://hono.dev/) - Ultralight, modern backend framework
-- [**Cloudflare Workers**](https://developers.cloudflare.com/workers/) - Edge computing platform for global deployment
-
-### ✨ Key Features
-
-- 🔥 Hot Module Replacement (HMR) for rapid development
-- 📦 TypeScript support out of the box
-- 🛠️ ESLint configuration included
-- ⚡ Zero-config deployment to Cloudflare's global network
-- 🎯 API routes with Hono's elegant routing
-- 🔄 Full-stack development setup
-- 🔎 Built-in Observability to monitor your Worker
-
-Get started in minutes with local development or deploy directly via the Cloudflare dashboard. Perfect for building modern, performant web applications at the edge.
-
-<!-- dash-content-end -->
+- 🔗 **Shorten URLs** - Convert long URLs into short, shareable links
+- 🎯 **Custom Aliases** - Create memorable custom short codes
+- ⏰ **Expiration (TTL)** - Set automatic expiration times for links
+- 📊 **URL Management** - View and manage all your shortened URLs
+- 🎨 **Modern UI** - Chromium-inspired design with smooth animations
+- ⚡ **Edge Deployment** - Runs on Cloudflare's global network
+- 💾 **D1 Database** - Persistent storage with Cloudflare D1
 
 ## Getting Started
 
-To start a new project with this template, run:
+### Prerequisites
 
+- Node.js 18+
+- npm or yarn
+- Cloudflare account (for deployment)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/vite-react-template
+git clone <repository-url>
+cd link
 ```
 
-A live deployment of this template is available at:
-[https://react-vite-template.templates.workers.dev](https://react-vite-template.templates.workers.dev)
-
-## Development
-
-Install dependencies:
-
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-Start the development server with:
+3. Set up the D1 database:
 
+**For local development:**
+```bash
+# Create the database schema locally
+npx wrangler d1 execute home_db --local --file=./schema.sql
+```
+
+**For production:**
+```bash
+# The database is already configured in wrangler.json
+# Apply the schema to production:
+npx wrangler d1 execute home_db --file=./schema.sql
+```
+
+### Development
+
+Start the development server:
 ```bash
 npm run dev
 ```
 
 Your application will be available at [http://localhost:5173](http://localhost:5173).
 
-## Production
+## Deployment
 
-Build your project for production:
-
-```bash
-npm run build
-```
-
-Preview your build locally:
-
-```bash
-npm run preview
-```
-
-Deploy your project to Cloudflare Workers:
-
+Build and deploy to Cloudflare Workers:
 ```bash
 npm run build && npm run deploy
 ```
 
-Monitor your workers:
-
+Monitor your worker:
 ```bash
 npx wrangler tail
+```
+
+## API Endpoints
+
+### POST /api/shorten
+Create a shortened URL.
+
+**Request:**
+```json
+{
+  "url": "https://example.com/very/long/url",
+  "alias": "my-link",  // optional
+  "ttl": 3600          // optional, in seconds
+}
+```
+
+**Response:**
+```json
+{
+  "short_url": "https://your-domain.com/abc123",
+  "short_code": "abc123",
+  "original_url": "https://example.com/very/long/url",
+  "expires_at": 1234567890  // unix timestamp, or null
+}
+```
+
+### GET /api/urls
+List all shortened URLs.
+
+**Response:**
+```json
+{
+  "urls": [
+    {
+      "short_code": "abc123",
+      "original_url": "https://example.com",
+      "short_url": "https://your-domain.com/abc123",
+      "created_at": 1234567890,
+      "expires_at": 1234571490,
+      "is_expired": false
+    }
+  ]
+}
+```
+
+### GET /:shortCode
+Redirect to the original URL (302 redirect).
+
+Returns 404 if the short code doesn't exist or has expired.
+
+## Database Schema
+
+The application uses Cloudflare D1 with the following schema:
+
+```sql
+CREATE TABLE urls (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  short_code TEXT UNIQUE NOT NULL,
+  original_url TEXT NOT NULL,
+  created_at INTEGER NOT NULL,
+  expires_at INTEGER
+);
 ```
 
 ## Additional Resources
 
 - [Cloudflare Workers Documentation](https://developers.cloudflare.com/workers/)
+- [Cloudflare D1 Documentation](https://developers.cloudflare.com/d1/)
 - [Vite Documentation](https://vitejs.dev/guide/)
 - [React Documentation](https://reactjs.org/)
 - [Hono Documentation](https://hono.dev/)
+
