@@ -2,7 +2,9 @@
 
 A modern, full-stack URL shortener built with React, Vite, Hono, and Cloudflare Workers with D1 database.
 
-![URL Shortener](![alt text](public/image.png))
+[![Deployed on Cloudflare Workers](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Workers-F38020?logo=cloudflare&logoColor=white)](https://link.dev-ansung.workers.dev)
+
+![URL Shortener](public/image.png)
 
 ## ✨ Features
 
