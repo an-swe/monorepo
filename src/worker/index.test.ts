@@ -1,27 +1,33 @@
 import { describe, it, expect, beforeEach } from "vitest";
 
 // Mock D1Database for testing
+interface MockUrlRecord {
+  short_code: string;
+  original_url: string;
+  created_at: number;
+  expires_at: number | null;
+}
+
 class MockD1Database {
-  private data: Map<string, any> = new Map();
+  private data: Map<string, MockUrlRecord> = new Map();
 
   prepare(query: string) {
-    const self = this;
     return {
-      bind: (...params: any[]) => ({
+      bind: (...params: unknown[]) => ({
         first: async () => {
           if (query.includes("SELECT") && query.includes("WHERE short_code = ?")) {
-            const shortCode = params[0];
-            return self.data.get(shortCode) || null;
+            const shortCode = params[0] as string;
+            return this.data.get(shortCode) || null;
           }
           return null;
         },
         run: async () => {
           if (query.includes("INSERT INTO urls")) {
-            const [shortCode, originalUrl, createdAt, expiresAt] = params;
-            if (self.data.has(shortCode)) {
+            const [shortCode, originalUrl, createdAt, expiresAt] = params as [string, string, number, number | null];
+            if (this.data.has(shortCode)) {
               throw new Error("UNIQUE constraint failed");
             }
-            self.data.set(shortCode, {
+            this.data.set(shortCode, {
               short_code: shortCode,
               original_url: originalUrl,
               created_at: createdAt,
@@ -32,13 +38,13 @@ class MockD1Database {
           return { success: false };
         },
         all: async () => {
-          const results = Array.from(self.data.values());
+          const results = Array.from(this.data.values());
           return { results };
         },
       }),
       // Support calling all() directly without bind()
       all: async () => {
-        const results = Array.from(self.data.values());
+        const results = Array.from(this.data.values());
         return { results };
       },
     };
@@ -52,9 +58,9 @@ class MockD1Database {
 // Import the UrlShortenerService class (we'll need to export it)
 // For now, we'll duplicate the class for testing purposes
 class UrlShortenerService {
-  private db: any;
+  private db: MockD1Database;
 
-  constructor(db: any) {
+  constructor(db: MockD1Database) {
     this.db = db;
   }
 
@@ -170,7 +176,7 @@ class UrlShortenerService {
       .all();
 
     const currentTime = Math.floor(Date.now() / 1000);
-    return results.results.map((row: any) => ({
+    return results.results.map((row: MockUrlRecord) => ({
       short_code: row.short_code,
       original_url: row.original_url,
       created_at: row.created_at,

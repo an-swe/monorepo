@@ -73,7 +73,7 @@ function App() {
         setCustomTtl("");
         fetchUrls(); // Refresh list
       }
-    } catch (err) {
+    } catch {
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);

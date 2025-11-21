@@ -138,10 +138,15 @@ class UrlShortenerService {
   }>> {
     const results = await this.db
       .prepare("SELECT short_code, original_url, created_at, expires_at FROM urls ORDER BY created_at DESC")
-      .all();
+      .all<{
+        short_code: string;
+        original_url: string;
+        created_at: number;
+        expires_at: number | null;
+      }>();
 
     const currentTime = Math.floor(Date.now() / 1000);
-    return results.results.map((row: any) => ({
+    return results.results.map((row) => ({
       short_code: row.short_code,
       original_url: row.original_url,
       created_at: row.created_at,
