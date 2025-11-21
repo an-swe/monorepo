@@ -2,7 +2,7 @@
 
 A modern, full-stack URL shortener built with React, Vite, Hono, and Cloudflare Workers with D1 database.
 
-![URL Shortener](https://imagedelivery.net/wSMYJvS3Xw-n339CbDyDIA/fc7b4b62-442b-4769-641b-ad4422d74300/public)
+![URL Shortener](![alt text](public/image.png))
 
 ## ✨ Features
 
