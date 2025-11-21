@@ -59,6 +59,25 @@ npm run dev
 
 Your application will be available at [http://localhost:5173](http://localhost:5173).
 
+### Testing
+
+Run the test suite:
+```bash
+npm test
+```
+
+Run tests in watch mode (useful during development):
+```bash
+npm run test:watch
+```
+
+The test suite includes:
+- URL validation tests
+- Alias validation tests (alphanumeric, length, reserved words)
+- Short code generation and uniqueness tests
+- Database operations (create, retrieve, list URLs)
+- TTL/expiration logic tests
+
 ## Deployment
 
 Build and deploy to Cloudflare Workers:
