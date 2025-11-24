@@ -53,6 +53,33 @@ The repository is organized as a monorepo using NPM Workspaces.
         npm run dev:link
         ```
 
+## Creating a New App
+
+Use the interactive CLI tool to create a new app:
+
+```bash
+npm run create-app
+```
+
+This will:
+1. Prompt you for the app name
+2. Scaffold a React + TypeScript app with Vite
+3. Restructure files for Cloudflare Workers
+4. Add Cloudflare dependencies (Hono, Wrangler, etc.)
+5. Configure Vite with Cloudflare plugin
+6. Create a worker entry point
+7. Generate Wrangler configuration
+8. Update TypeScript configurations
+9. Add workspace scripts to root package.json
+10. Create GitHub Actions deployment workflow
+
+After the tool completes:
+
+```bash
+npm install
+npm run dev:your-app
+```
+
 ## Deployment
 
 Continuous deployment is handled via GitHub Actions, deploying directly to Cloudflare's global edge network.

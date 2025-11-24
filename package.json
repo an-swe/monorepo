@@ -6,6 +6,7 @@
     "packages/*"
   ],
   "scripts": {
+    "create-app": "node scripts/create-app.js",
     "dev:link": "npm run dev --workspace=apps/link",
     "deploy:link": "npm run deploy --workspace=apps/link",
     "dev:index": "npm run dev --workspace=apps/index",
