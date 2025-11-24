@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Running pre-push checks..."
+
+# Lint all workspaces
+echo "\n📝 Linting..."
+npm run lint --workspaces --if-present || exit 1
+
+# Test all workspaces
+echo "\n🧪 Running tests..."
+npm test --workspaces --if-present || exit 1
+
+echo "✅ All checks passed!\n"
+

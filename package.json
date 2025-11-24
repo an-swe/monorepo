@@ -10,6 +10,10 @@
     "dev:link": "npm run dev --workspace=apps/link",
     "deploy:link": "npm run deploy --workspace=apps/link",
     "dev:index": "npm run dev --workspace=apps/index",
-    "deploy:index": "npm run deploy --workspace=apps/index"
+    "deploy:index": "npm run deploy --workspace=apps/index",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }

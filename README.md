@@ -1,13 +1,14 @@
 # anprogrammer.org
 
-[![Deployed on Cloudflare Workers](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Workers-F38020?logo=cloudflare&logoColor=white)](https://link.dev-ansung.workers.dev)
-[![Link App CI](https://github.com/an-swe/link/actions/workflows/deploy-link.yml/badge.svg)](https://github.com/an-swe/link/actions/workflows/deploy-link.yml)
-[![Index App CI](https://github.com/an-swe/link/actions/workflows/deploy-index.yml/badge.svg)](https://github.com/an-swe/link/actions/workflows/deploy-index.yml)
+[![Deployed on Cloudflare Workers](https://img.shields.io/badge/Deployed%20on-Cloudflare%20Workers-F38020?logo=cloudflare&logoColor=white)](https://anprogrammer.org)
 [![Built with React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![Hono](https://img.shields.io/badge/Hono-4.8-E36002?logo=hono&logoColor=white)](https://hono.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![Link App CI](https://github.com/an-swe/link/actions/workflows/deploy-link.yml/badge.svg)](https://github.com/an-swe/link/actions/workflows/deploy-link.yml)
+[![Index App CI](https://github.com/an-swe/link/actions/workflows/deploy-index.yml/badge.svg)](https://github.com/an-swe/link/actions/workflows/deploy-index.yml)
 
 The source code for the `anprogrammer.org` ecosystem, a collection of high-performance web applications and utilities built on the modern web stack.
 
