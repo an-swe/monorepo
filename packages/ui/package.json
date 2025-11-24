@@ -4,11 +4,15 @@
   "main": "./index.tsx",
   "types": "./index.tsx",
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "*",
+    "react-dom": "*"
   },
   "peerDependencies": {
     "react": "*",
     "react-dom": "*"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4"
   }
 }

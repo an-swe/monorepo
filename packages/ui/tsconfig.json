@@ -1,0 +1,10 @@
+{
+  "extends": "@repo/config/tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["*.tsx", "*.ts"],
+  "exclude": ["node_modules"]
+}
