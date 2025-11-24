@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Layout } from "@repo/ui";
 import "./App.css";
 
 interface ShortenedUrl {
@@ -103,14 +104,16 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <div className="container">
-        <header>
-          <h1>🔗 URL Shortener</h1>
-          <p>Create short, shareable links with optional custom aliases and expiration</p>
-        </header>
+    <Layout title="link.anprogrammer.org">
+      <section className="hero">
+        <h1 className="hero-title">URL Shortener</h1>
+        <p className="hero-desc">
+          Create short, shareable links with optional custom aliases and expiration.
+        </p>
+      </section>
 
-        <div className="card">
+      <div className="shortener-container">
+        <div className="card-form">
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label htmlFor="url">URL to shorten *</label>
@@ -121,6 +124,7 @@ function App() {
                 onChange={(e) => setUrl(e.target.value)}
                 placeholder="https://example.com/very/long/url"
                 required
+                className="input-field"
               />
             </div>
 
@@ -133,6 +137,7 @@ function App() {
                   value={alias}
                   onChange={(e) => setAlias(e.target.value)}
                   placeholder="my-link"
+                  className="input-field"
                 />
                 <small>3-20 alphanumeric characters</small>
               </div>
@@ -143,6 +148,7 @@ function App() {
                   id="ttl"
                   value={ttl}
                   onChange={(e) => setTtl(e.target.value)}
+                  className="input-field"
                 >
                   <option value="">Never expires</option>
                   <option value="3600">1 hour</option>
@@ -163,6 +169,7 @@ function App() {
                   onChange={(e) => setCustomTtl(e.target.value)}
                   placeholder="3600"
                   min="1"
+                  className="input-field"
                 />
               </div>
             )}
@@ -244,7 +251,7 @@ function App() {
           </div>
         )}
       </div>
-    </div>
+    </Layout>
   );
 }
 
